@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Cliente</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        // Função para adicionar um cliente à lista
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('form-cadastro');
+            const listaClientes = document.getElementById('clientes-lista-ul');
+
+            // Quando o formulário for enviado
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();  // Evita o envio padrão do formulário (recarregar a página)
+
+                // Coletando os dados do formulário
+                const nome = document.getElementById('nome').value;
+                const email = document.getElementById('email').value;
+                const telefone = document.getElementById('tel').value;
+                const tipo = document.getElementById('tipo').value;
+
+                // Verifica se os campos obrigatórios estão preenchidos
+                if (!nome || !email) {
+                    alert('Por favor, preencha o nome e o e-mail.');
+                    return;
+                }
+
+                // Cria um novo item de lista para o cliente
+                const novoCliente = document.createElement('li');
+                novoCliente.textContent = `${nome} - ${email} - ${telefone ? telefone : 'Não informado'} - ${tipo === 'pessoa-fisica' ? 'Pessoa Física' : 'Pessoa Jurídica'}`;
+
+                // Adiciona o novo cliente à lista
+                listaClientes.appendChild(novoCliente);
+
+                // Limpa o formulário após o envio
+                form.reset();
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -44,7 +78,7 @@
         <div id="clientes-lista">
             <h3>Clientes Cadastrados:</h3>
             <ul id="clientes-lista-ul">
-                <!-- Lista de clientes estará vazia no início -->
+                <!-- A lista estará vazia inicialmente -->
             </ul>
         </div>
     </div>
